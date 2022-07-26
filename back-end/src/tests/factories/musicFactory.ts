@@ -1,6 +1,6 @@
 import { prisma } from "../../database.js";
 
-function createMusicData(wrong: boolean, name = "teste1") {
+function createMusicData(wrong: boolean, name = "test1") {
   return {
     name,
     youtubeLink: wrong
@@ -22,5 +22,16 @@ async function createMusicPost(musicData: Music) {
   return { ...music };
 }
 
-const musicFactory = { createMusicData, createMusicPost };
+async function createTwoMusicsPosts() {
+  const names = ["test 1", "test 2"];
+  const musics = names.map((name) => {
+    const isWrongLink = false;
+    return createMusicData(isWrongLink, name);
+  });
+  await prisma.recommendation.createMany({
+    data: musics,
+  });
+}
+
+const musicFactory = { createMusicData, createMusicPost, createTwoMusicsPosts };
 export default musicFactory;
