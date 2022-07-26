@@ -1,11 +1,13 @@
+import { faker } from "@faker-js/faker";
+
 import { prisma } from "../../database.js";
 
 function createMusicData(wrong: boolean, name = "test1") {
   return {
     name,
     youtubeLink: wrong
-      ? "https://www.dexctribe.com/watch?v=D9G1VOjN_84"
-      : "https://www.youtube.com/watch?v=D9G1VOjN_84",
+      ? `https://www.dexctribe.com/${faker.random.alpha()}`
+      : `https://www.youtube.com/${faker.random.alpha()}`,
   };
 }
 
