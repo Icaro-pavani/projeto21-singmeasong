@@ -1,13 +1,13 @@
 import supertest from "supertest";
 
-import app from "../app.js";
-import { prisma } from "../database.js";
-import musicFactory from "./factories/musicFactory.js";
+import app from "../../src/app.js";
+import { prisma } from "../../src/database.js";
+import musicFactory from "../factories/musicFactory.js";
 
 const agent = supertest(app);
 
 beforeEach(async () => {
-  await prisma.$executeRaw`TRUNCATE TABLE recommendations`;
+  await prisma.$executeRaw`TRUNCATE TABLE recommendations RESTART IDENTITY`;
 });
 
 describe("Post musics suite", () => {
