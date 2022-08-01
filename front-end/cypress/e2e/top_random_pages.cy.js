@@ -143,6 +143,7 @@ describe("top and random pages suite", () => {
     );
     cy.contains("Random").click();
     cy.wait("@random");
+    cy.url().should("equal", "http://localhost:3000/random");
 
     cy.get("article").should("have.length", 1);
   });
